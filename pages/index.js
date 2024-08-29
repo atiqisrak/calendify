@@ -1,9 +1,10 @@
-import MiniCalendar from "../components/MiniCalendar";
+import React, { useState } from "react";
 import SearchBar from "../components/SearchBar";
 import ClientList from "../components/ClientList";
-import dummyData from "/public/data/data.json";
-import { useState } from "react";
+import MiniCalendar from "../components/MiniCalendar";
 import MainCalendar from "../components/MainCalendar";
+import DragDropContextProvider from "../components/DragDropContextProvider";
+import dummyData from "/public/data/data.json";
 
 const HomePage = () => {
   const [clients, setClients] = useState(dummyData);
@@ -13,7 +14,7 @@ const HomePage = () => {
 
   // Function to handle client selection
   const handleClientSelect = (clientId) => {
-    const filtered = dummyData?.filter((event) => event.client_id === clientId);
+    const filtered = dummyData.filter((event) => event.client_id === clientId);
     setFilteredEvents(filtered);
   };
 
@@ -29,6 +30,13 @@ const HomePage = () => {
     // Update event logic here and persist changes to local storage if needed
   };
 
+  // Handle Drag and Drop
+  const handleDragEnd = (result) => {
+    if (!result.destination) return; // Exit if dropped outside any droppable area
+    console.log("Dropped:", result);
+    // Update events after drag and drop
+  };
+
   return (
     <div className="flex flex-col items-start p-4 md:flex-row">
       <div className="w-full md:w-1/3">
@@ -37,6 +45,10 @@ const HomePage = () => {
         <ClientList
           filteredClients={filteredClients}
           onClientSelect={handleClientSelect}
+        />
+        <DragDropContextProvider
+          events={filteredEvents}
+          onDragEnd={handleDragEnd}
         />
       </div>
       <div className="w-full md:w-2/3">
