@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Calendar from "react-calendar";
-import "react-calendar/dist/Calendar.css"; // Import the default styles
+import "react-calendar/dist/Calendar.css"; // Import default styles
+import { enUS } from "date-fns/locale"; // Import the specific locale from date-fns
 
 const MiniCalendar = ({ onDateChange }) => {
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -17,6 +18,7 @@ const MiniCalendar = ({ onDateChange }) => {
         onChange={handleDateChange}
         value={selectedDate}
         className="w-full"
+        locale="en-US" // Set the locale directly to 'en-US'
         tileClassName="p-1 hover:bg-gray-200 transition duration-150 rounded-md"
       />
     </div>
