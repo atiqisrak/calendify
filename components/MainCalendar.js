@@ -1,48 +1,88 @@
 import React, { useRef } from "react";
 import FullCalendar from "@fullcalendar/react";
-import dayGridPlugin from "@fullcalendar/daygrid"; // For month view
-import timeGridPlugin from "@fullcalendar/timegrid"; // For week and day views
-import interactionPlugin from "@fullcalendar/interaction"; // For drag-and-drop, dateClick
+import dayGridPlugin from "@fullcalendar/daygrid";
+import timeGridPlugin from "@fullcalendar/timegrid";
+import interactionPlugin from "@fullcalendar/interaction";
 
-const MainCalendar = ({ events, onEventDrop, selectedDate }) => {
+const MainCalendar = ({
+  events,
+  onEventDrop,
+  selectedDate,
+  setFilteredEvents,
+  setFilteredClients,
+}) => {
   const calendarRef = useRef(null);
 
-  // Handle date click (when a date is clicked on the calendar)
   const handleDateClick = (arg) => {
     console.log(`Date clicked: ${arg.dateStr}`);
-    // You can add logic to create a new event or show details for the date clicked
   };
 
-  // Handle event drop (when an event is dragged and dropped to a new date/time)
   const handleEventDrop = (info) => {
     console.log("Event dropped on: ", info.event.start);
-    // Update the event's start date in state or backend here
     if (onEventDrop) onEventDrop(info.event);
   };
 
-  // Ensure unique keys for events
-  const formattedEvents = events.map((event, index) => ({
-    ...event,
-    id: `${event.client_id}-${event.id}-${index}`, // Generate a unique key using multiple fields
-  }));
-
   return (
     <div className="w-full p-4 border border-gray-300 rounded-md shadow-sm mt-4">
+      {/* Dropdown Controls */}
+      <div className="flex justify-between items-center mb-4">
+        <select
+          className="border p-2 rounded-md"
+          onChange={(e) => {
+            const selectedArea = e.target.value;
+            setFilteredEvents(
+              events.filter((event) => event.assetArea === selectedArea)
+            );
+          }}
+        >
+          <option value="">Area</option>
+          {Array.from(new Set(events.map((event) => event.assetArea))).map(
+            (area) => (
+              <option key={area} value={area}>
+                {area}
+              </option>
+            )
+          )}
+        </select>
+        <div className="flex space-x-2">
+          <select
+            className="border p-2 rounded-md"
+            onChange={(e) => {
+              const isPublished = e.target.value === "Published" ? 1 : 0;
+              setFilteredEvents(
+                events.filter((event) => event.isPublish === isPublished)
+              );
+            }}
+          >
+            <option value="">All</option>
+            <option value="Draft">Draft</option>
+            <option value="Published">Published</option>
+          </select>
+
+          <select
+            className="border p-2 rounded-md"
+            onChange={(e) => {
+              const selectedView = e.target.value.toLowerCase(); // 'dayGridMonth', 'timeGridWeek', 'timeGridDay'
+              calendarRef.current.getApi().changeView(selectedView);
+            }}
+          >
+            <option value="dayGridMonth">Month</option>
+            <option value="timeGridWeek">Week</option>
+            <option value="timeGridDay">Day</option>
+          </select>
+        </div>
+      </div>
       <FullCalendar
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
         initialView="dayGridMonth"
-        events={formattedEvents} // Use formatted events with unique keys
+        events={events}
         dateClick={handleDateClick}
         eventDrop={handleEventDrop}
-        editable={true} // Allows events to be dragged and dropped
-        droppable={true} // Allows items to be dropped onto the calendar
+        editable={true}
+        droppable={true}
         ref={calendarRef}
         initialDate={selectedDate}
-        headerToolbar={{
-          left: "prev,next today",
-          center: "title",
-          right: "dayGridMonth,timeGridWeek,timeGridDay",
-        }}
+        headerToolbar={false}
         height={500}
       />
     </div>
