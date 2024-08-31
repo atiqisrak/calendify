@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { FaSearch } from "react-icons/fa"; // Importing FontAwesome for a search icon
 
 const SearchBar = ({ clients, setFilteredClients }) => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -27,19 +28,22 @@ const SearchBar = ({ clients, setFilteredClients }) => {
     setFilteredClients(filteredClients);
   };
 
+  // console.log("Clients:", clients);
+
   return (
-    <div className="mb-4 p-2 flex justify-between">
+    <div className="mb-4 px-4 py-2 flex items-center space-x-2 bg-gray-100 rounded-lg">
+      <FaSearch className="text-gray-500" />
+
       <input
         type="text"
-        placeholder="Search Engineer... ⌘+F"
+        placeholder="Search Engineer"
         value={searchQuery}
         onChange={handleSearch}
         ref={inputRef}
-        className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-400"
+        className="w-full p-2 bg-gray-100 focus:outline-none focus:border-blue-400"
       />
-      {/* ⌘+F button */}
       <button
-        className="mt-2 px-4 py-1 bg-blue-500 text-white rounded-md"
+        className="px-4 py-1 text-gray-800 bg-white rounded-lg shadow"
         onClick={() => inputRef.current.focus()}
       >
         ⌘+F

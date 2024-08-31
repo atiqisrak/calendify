@@ -8,7 +8,7 @@ const DragDropContextProvider = ({ events, onDragEnd }) => {
       <Droppable droppableId="events">
         {(provided) => (
           <div
-            className="p-4 max-h-[500px] overflow-y-auto"
+            className="p-4 max-h-[800px] overflow-y-auto"
             ref={provided.innerRef}
             {...provided.droppableProps}
           >

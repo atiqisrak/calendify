@@ -13,11 +13,11 @@ const MiniCalendar = ({ onDateChange }) => {
   };
 
   return (
-    <div className="w-full p-4 border border-gray-300 rounded-md shadow-sm mt-4">
+    <div className="w-full my-4 flex justify-center">
       <Calendar
         onChange={handleDateChange}
         value={selectedDate}
-        className="w-full"
+        className="w-full rounded-lg shadow-md p-4"
         locale="en-US" // Set the locale directly to 'en-US'
         tileClassName="p-1 hover:bg-gray-200 transition duration-150 rounded-md"
       />
