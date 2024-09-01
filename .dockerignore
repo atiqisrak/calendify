@@ -1,0 +1,13 @@
+node_modules
+npm-debug.log
+yarn-error.log
+.next
+out
+.git
+Dockerfile
+docker-compose.yml
+.dockerignore
+README.md
+.env.local
+.env.development
+.env.production
