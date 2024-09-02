@@ -14,6 +14,7 @@ const MainCalendar = ({
 }) => {
   const handleDateClick = (arg) => {
     console.log(`Date clicked: ${arg.dateStr}`);
+    alert("Date clicked: " + arg.dateStr);
   };
 
   const handleEventDrop = (info) => {
@@ -66,7 +67,7 @@ const MainCalendar = ({
     );
   };
 
-  console.log("Events:", events);
+  // console.log("Events:", events);
 
   return (
     <div className="w-full p-4 border border-gray-300 rounded-md shadow-sm mt-4">
@@ -99,18 +100,18 @@ const MainCalendar = ({
           <button
             className="px-4 py-2 bg-white shadow-md border border-gray-200 rounded-full text-gray-400"
             onClick={() => {
-              calendarRef.current.getApi().prev();
+              calendarRef?.current.getApi().prev();
             }}
           >
             {"<"}
           </button>
           <span className="text-md text-gray-600 uppercase">
-            {selectedDate.toDateString()}
+            {selectedDate?.toDateString()}
           </span>
           <button
             className="px-4 py-2 bg-white shadow-md border border-gray-200 rounded-full text-gray-400"
             onClick={() => {
-              calendarRef.current.getApi().next();
+              calendarRef?.current.getApi().next();
             }}
           >
             {">"}
@@ -136,8 +137,8 @@ const MainCalendar = ({
           <select
             className="border p-2 rounded-md"
             onChange={(e) => {
-              const selectedView = e.target.value; // Correct view value
-              calendarRef.current.getApi().changeView(selectedView); // Use ref to change view
+              const selectedView = e.target.value;
+              calendarRef.current.getApi().changeView(selectedView);
             }}
           >
             <option value="dayGridMonth">Month</option>

@@ -12,10 +12,13 @@ function MyApp({ Component, pageProps }) {
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta charSet="UTF-8" />
-        <meta property="og:title" content="Calendar Management System" />
+        <meta
+          property="og:title"
+          content="Calendify - Your Calendar Management System"
+        />
         <meta
           property="og:description"
-          content="Manage your events seamlessly with a powerful and interactive calendar system."
+          content="Manage your events seamlessly with a powerful and interactive calendar system developed by Atiq Israk"
         />
         <meta property="og:image" content="/public/images/ref1.png" />
         <link rel="icon" href="/favicon.ico" />

@@ -16,19 +16,14 @@ const HomePage = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [filteredEvents, setFilteredEvents] = useState(dummyData);
 
-  // To control MainCalendar from MiniCalendar
-  const calendarRef = useRef(null); // Add a reference for MainCalendar
-
-  const handleClientSelect = (clientId) => {
-    const filtered = dummyData.filter((event) => event.client_id === clientId);
-    setFilteredEvents(filtered);
-  };
+  // To control MainCalendar from MiniCalendar, Add a reference for MainCalendar
+  const calendarRef = useRef(null);
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
     // Switch to day view and set the date in MainCalendar
-    calendarRef.current?.getApi().changeView("timeGridDay"); // Switch to day view
-    calendarRef.current?.getApi().gotoDate(date); // Set the selected date
+    calendarRef.current?.getApi().changeView("timeGridDay");
+    calendarRef.current?.getApi().gotoDate(date);
   };
 
   const handleEventDrop = (event) => {
@@ -81,7 +76,7 @@ const HomePage = () => {
             setFilteredEvents={setFilteredEvents}
             setFilteredClients={setFilteredClients}
             allEvents={dummyData}
-            calendarRef={calendarRef} // Pass calendarRef to MainCalendar
+            calendarRef={calendarRef}
           />
         </div>
       </div>

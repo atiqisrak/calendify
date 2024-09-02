@@ -8,7 +8,7 @@ const EventCard = ({ event }) => {
         className="mr-2"
         onChange={() => console.log("Checkbox clicked")}
       />
-      <h4 className="font-bold mb-1">{event.engineerName}</h4>
+      <h4 className="font-bold mb-1">{event?.engineerName}</h4>
     </div>
   );
 };

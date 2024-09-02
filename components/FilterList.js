@@ -3,8 +3,8 @@ import React from "react";
 const FilterList = ({ items, selectedItems, toggleSelectItem }) => {
   return (
     <div className="mb-4">
-      {items.map((item) =>
-        item.name ? ( // Only display items with a name
+      {items?.map((item) =>
+        item?.name ? (
           <div key={item.id} className="flex items-center mb-2">
             <input
               type="checkbox"
@@ -12,7 +12,7 @@ const FilterList = ({ items, selectedItems, toggleSelectItem }) => {
               onChange={() => toggleSelectItem(item.id)}
               className="mr-2"
             />
-            <span className="text-sm text-gray-700">{item.name}</span>
+            <span className="text-sm text-gray-700">{item?.name}</span>
           </div>
         ) : null
       )}

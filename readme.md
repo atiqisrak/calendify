@@ -10,16 +10,18 @@ Calendify is a web-based calendar application built using Next.js 12 that allows
 - **Main Calendar View:** Supports day, week, month, and year views with drag-and-drop event management.
 - **Drag-and-Drop Functionality:** Allows dragging client cards to specific date cells in the main calendar.
 - **Data Persistence:** All data is saved in local storage, ensuring synchronization across page reloads.
+- **Docker Support:** Easily deploy the application using Docker for consistent development and production environments.
 
 ## Tech Stack
 
-- **Frontend:** Next.js 12, React
+- **Frontend:** Next.js 14, React 18
 - **Libraries:**
   - `react-calendar` for the mini-calendar.
-  - `react-big-calendar` for the main calendar.
-  - `react-dnd` for drag-and-drop functionality.
-- **Styling:** CSS Modules, Styled Components
+  - `@fullcalendar/react`, `@fullcalendar/daygrid`, `@fullcalendar/timegrid`, and `@fullcalendar/interaction` for the main calendar.
+  - `react-beautiful-dnd` for drag-and-drop functionality.
+- **Styling:** Tailwind CSS
 - **Data Storage:** Local Storage
+- **Containerization:** Docker, Docker Compose
 
 ## Getting Started
 
@@ -45,6 +47,21 @@ Ensure you have Node.js and npm installed on your machine.
 4. **Open your browser and navigate to:**
    ```bash
    http://localhost:3000
+   ```
+
+## Docker Setup
+
+1. **Build and run the Docker container:**
+   ```bash
+   docker-compose up --build
+   ```
+2. **Access the application at:**
+   ```bash
+   http://localhost:3000
+   ```
+3. **Stop the Docker container:**
+   ```bash
+   docker-compose down
    ```
 
 ## Usage

@@ -12,7 +12,7 @@ const DragDropContextProvider = ({ events, onDragEnd }) => {
             ref={provided.innerRef}
             {...provided.droppableProps}
           >
-            {events.map((event, index) => (
+            {events?.map((event, index) => (
               <Draggable
                 key={event.id}
                 draggableId={event.id.toString()}
